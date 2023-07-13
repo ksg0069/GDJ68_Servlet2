@@ -119,8 +119,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# My List
-DBConnector.java
+
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,java,eclipse
 src/main/java/asdasd.java
