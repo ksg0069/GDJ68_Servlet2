@@ -14,14 +14,7 @@
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	<!--  Tomcat(was)에게 Servlet 객체 생성 -->
 	<servlet>
 		<servlet-name> fc </servlet-name> 	<!-- 매개변수 생성하는 의미 -->

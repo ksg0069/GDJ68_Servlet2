@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-	<h1>index Page</h1>
-	<a a href="./bankbook/list.do"> 금융상품몰</a>
-	<a a href="/bankbook/list.do"> 금융 </a>
-
+	<h1>페이지 없음</h1>
 </body>
 </html>
