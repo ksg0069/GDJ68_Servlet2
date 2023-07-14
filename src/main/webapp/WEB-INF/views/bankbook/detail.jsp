@@ -27,7 +27,7 @@
 		<h1>판매종료</h1>
 		</c:otherwise>
 	</c:choose>
-	
+
 	
 	<c:if test="${dto.bookSale == 1}"> 
 		<h1>판매중</h1>
