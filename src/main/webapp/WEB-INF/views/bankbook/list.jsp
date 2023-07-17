@@ -19,10 +19,10 @@
 		</thead>
 		
 		<tbody>
-			<c:forEach items="${list}" var="d" varStatus="i"> <!-- arrylist를(콜렉션 계열) items에 넣는다 , items의 갯수만큼 꺼내서 돌림 var=d->dto의미  -->
+			<c:forEach items="${list}" var="d" varStatus="i"> <!-- 서버에서 보낸 arrylist를(콜렉션 계열) items에 넣는다 , items의 갯수만큼 꺼내서 돌림 var=d->dto의미  -->
 			
 				 <tr>
-					<td><a href="./detail.do?bookNum=${d.bookNum}">${d.bookName}</a></a></td>	
+					<td><a href="./detail.do?bookNum=${d.bookNum}">${d.bookName}</a></td>	
 					<td>${d.bookRate} </td>
 					<td>${i.index }</td> 	 
 	 			</tr>

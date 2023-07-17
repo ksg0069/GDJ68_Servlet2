@@ -46,6 +46,8 @@ public class BankBookController extends HttpServlet {
 			
 			String path = request.getPathInfo();
 			String viewName ="/WEB-INF/views/errors/notFound.jsp";
+			boolean flag = true;
+			
 			if(path.equals("/list.do")) {
 				System.out.println("목록");
 				ArrayList<BankBookDTO> ar = bankBookDAO.bankBookList();
@@ -72,27 +74,71 @@ public class BankBookController extends HttpServlet {
 					bannkBankBookDTO.setBookName(request.getParameter("bookName"));
 					bannkBankBookDTO.setBookRate(Double.parseDouble(request.getParameter("bookRate")) );
 					bannkBankBookDTO.setBookSale(Integer.parseInt(request.getParameter("bookSale")));
+					bannkBankBookDTO.setBookContents(request.getParameter("bookContents"));
 				
 					int result = bankBookDAO.bankBookAdd(bannkBankBookDTO);
 					request.setAttribute("result", result); 
-					viewName="/WEB-INF/views/commons/result.jsp";
+					
+					flag=false;
+					viewName="./list.do";
+//					viewName="/WEB-INF/views/commons/result.jsp";
+				
 				}else {
 					
 					viewName="/WEB-INF/views/bankbook/add.jsp";
 					
 				}
 			}else if(path.equals("/update.do")){
-				System.out.println("수정");
-				viewName="/WEB-INF/views/bankbook/update.jsp";
+				String method = request.getMethod();
+				
+				if (method.equals("POST")){
+					BankBookDTO bankBookDTO = new BankBookDTO();
+					bankBookDTO.setBookName(request.getParameter("bookName"));
+					bankBookDTO.setBookContents(request.getParameter("bookContents"));
+					bankBookDTO.setBookRate(Double.parseDouble(request.getParameter("bookRate")) );
+					bankBookDTO.setBookSale(Integer.parseInt(request.getParameter("bookSale")));
+					bankBookDTO.setBookNum(Long.parseLong(request.getParameter("bookNum")));
+					
+					int result = bankBookDAO.bankBookUpdate(bankBookDTO);
+					request.setAttribute("result", result);
+					
+					flag=false;
+					viewName="./detail.do?bookNum="+bankBookDTO.getBookNum();
+					
+//					viewName="/WEB-INF/views/commons/result.jsp";
+					
+					
+				}else {
+					System.out.println("수정");
+					String bookNum = request.getParameter("bookNum");
+					BankBookDTO bankBookDTO = new BankBookDTO();
+					bankBookDTO.setBookNum(Long.parseLong(bookNum));
+					bankBookDTO = bankBookDAO.bankBookDetail(bankBookDTO);
+					
+					request.setAttribute("dto", bankBookDTO);
+					viewName="/WEB-INF/views/bankbook/update.jsp";
+				}
+				
 			}else if(path.equals("/delete.do")) {
+				BankBookDTO bankBookDTO = new BankBookDTO();
+				bankBookDTO.setBookNum(Long.parseLong(request.getParameter("bookNum")));
+				int result = bankBookDAO.bankBookDelete(bankBookDTO);
+				
+				request.setAttribute("result", result);
+				viewName="/WEB-INF/views/commons/result.jsp";
 				System.out.println("삭제");
 				
 			}
 		
-			
+			if(flag ) {
+			// foward
 			RequestDispatcher view = request.getRequestDispatcher(viewName);    // webapps까지가 루트임
 			view.forward(request, response);
-		
+			}else {
+			//redirect
+			response.sendRedirect(viewName);			
+			}
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

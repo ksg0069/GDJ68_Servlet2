@@ -17,6 +17,10 @@
 	<!-- Getter 이름 : 메서드에서 get을 제외하고 첫번째 글자를 소문자로 바꾼것-->
 	<h1> ${ requestScope.dto.bookName }</h1>
 	
+	<div>
+	<h1>${ dto.bookContents }</h1>
+	</div>
+	
 	<h1> ${ dto.bookRate } </h1>
 	
 	<c:choose>   
@@ -27,14 +31,17 @@
 		<h1>판매종료</h1>
 		</c:otherwise>
 	</c:choose>
+	
+	<a href="./update.do?bookNum=${dto.bookNum}"> 수정 </a>
+	<a href="./delete.do?bookNum=${dto.bookNum }">삭제</a>
 
 	
-	<c:if test="${dto.bookSale == 1}"> 
+	<%-- <c:if test="${dto.bookSale == 1}"> 
 		<h1>판매중</h1>
 	</c:if>
 	<c:if test="${dto.bookSale == 0}"> 
 		<h1>판매 종료</h1>
-	</c:if>
+	</c:if> --%>
 
 </body>
 </html>

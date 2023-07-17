@@ -6,6 +6,7 @@ public class BankBookDTO {
 	private String bookName;
 	private double bookRate;
 	private int bookSale;
+	private String bookContents;
 	
 	public long getBookNum() {
 		return bookNum;
@@ -15,6 +16,12 @@ public class BankBookDTO {
 	}
 	public String getBookName() {
 		return bookName;
+	}
+	public String getBookContents() {
+		return bookContents;
+	}
+	public void setBookContents(String bookContents) {
+		this.bookContents = bookContents;
 	}
 	public void setBookName(String bookName) {
 		this.bookName = bookName;

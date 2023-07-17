@@ -88,6 +88,7 @@ public class BankBookDAO {
 			bankBookDTO.setBookName(rs.getNString("BOOKNAME"));
 			bankBookDTO.setBookRate(rs.getDouble("BOOKRATE"));
 			bankBookDTO.setBookSale(rs.getInt("BOOKSALE"));
+			bankBookDTO.setBookContents(rs.getString("BOOKCONTENTS"));
 		}else {
 			bankBookDTO=null;
 			
@@ -102,7 +103,7 @@ public class BankBookDAO {
 		//1. DB연결
 		Connection con = DBConnector.getConnection();	
 		//2. 쿼리문 작성
-		String sql= "INSERT INTO BANKBOOK VALUES (BANK_SEQ.NEXTVAL,?,?,?)";
+		String sql= "INSERT INTO BANKBOOK VALUES (BANK_SEQ.NEXTVAL,?,?,?,?)";
 		
 		//3. 쿼리문 미리 전송
 		PreparedStatement st = con.prepareStatement(sql);
@@ -111,6 +112,7 @@ public class BankBookDAO {
 		st.setString(1, bankBookDTO.getBookName());
 		st.setDouble(2, bankBookDTO.getBookRate());
 		st.setInt(3, bankBookDTO.getBookSale());
+		st.setString(4, bankBookDTO.getBookContents());
 		//5. 최종 전송 및 결과 처리
 		int result = st.executeUpdate();
 		
@@ -119,6 +121,28 @@ public class BankBookDAO {
 		
 		DBConnector.disConnect(st, con);
 		
+		return result;
+	}
+	
+	public int bankBookUpdate(BankBookDTO bankBookDTO) throws Exception{
+		int result = 0;
+		
+		//1. DB 연동
+		Connection con = DBConnector.getConnection();
+		//2. 쿼리문 작성
+		String sql = "UPDATE BANKBOOK SET BOOKNAME=?, BOOKCONTENTS=?, BOOKRATE=?, BOOKSALE=? WHERE BOOKNUM=?";
+		//3. 쿼리문 미리 전송
+		PreparedStatement st = con.prepareStatement(sql);
+		//4. ? 값 세팅
+		st.setString(1, bankBookDTO.getBookName());
+		st.setString(2, bankBookDTO.getBookContents());
+		st.setDouble(3, bankBookDTO.getBookRate());
+		st.setInt(4, bankBookDTO.getBookSale());
+		st.setLong(5, bankBookDTO.getBookNum());
+		//5. 최종 전송 및 결과처리
+		result = st.executeUpdate();
+		
+		DBConnector.disConnect(st, con);
 		return result;
 	}
 	

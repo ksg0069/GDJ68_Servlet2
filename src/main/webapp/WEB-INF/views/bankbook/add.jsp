@@ -9,7 +9,8 @@
 <body>
 <h1>Add page</h1>
 	<form action="./add.do" method="post">
-		상품명 <input type="text" name="bookName"> <br>  <!-- dto의 setter의 이름을 씀-->
+		상품명 <input type="text"  name="bookName"> <br>  <!-- dto의 setter의 이름을 씀-->
+		상세설명 <textarea rows="" cols="" name="bookContents"></textarea>
 		이자율 <input type="text" name="bookRate"> <br>
 		
 		<p>
