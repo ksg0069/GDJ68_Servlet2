@@ -23,7 +23,7 @@
 		<!-- <p>
 		<select name="bookSale">
 			<option value="1">판매가능</option>
-			<option value="0" selected>판매중지</option>	
+			<option value="0" selected>판매중지</option>		
 		</select>
 		</p> -->
 		

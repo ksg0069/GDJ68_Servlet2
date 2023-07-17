@@ -63,6 +63,7 @@ public class BankBookController extends HttpServlet {
 				BankBookDTO bankBookDTO = new BankBookDTO();
 				bankBookDTO.setBookNum(Long.parseLong(num));
 				bankBookDTO = bankBookDAO.bankBookDetail(bankBookDTO);
+				
 				request.setAttribute("dto", bankBookDTO);
 				
 				viewName="/WEB-INF/views/bankbook/detail.jsp";
@@ -70,13 +71,13 @@ public class BankBookController extends HttpServlet {
 				
 				String method =request.getMethod();
 				if(method.equals("POST")) {
-					BankBookDTO bannkBankBookDTO = new BankBookDTO();
-					bannkBankBookDTO.setBookName(request.getParameter("bookName"));
-					bannkBankBookDTO.setBookRate(Double.parseDouble(request.getParameter("bookRate")) );
-					bannkBankBookDTO.setBookSale(Integer.parseInt(request.getParameter("bookSale")));
-					bannkBankBookDTO.setBookContents(request.getParameter("bookContents"));
+					BankBookDTO BankBookDTO = new BankBookDTO();
+					BankBookDTO.setBookName(request.getParameter("bookName"));
+					BankBookDTO.setBookRate(Double.parseDouble(request.getParameter("bookRate")) );
+					BankBookDTO.setBookSale(Integer.parseInt(request.getParameter("bookSale")));
+					BankBookDTO.setBookContents(request.getParameter("bookContents"));
 				
-					int result = bankBookDAO.bankBookAdd(bannkBankBookDTO);
+					int result = bankBookDAO.bankBookAdd(BankBookDTO);
 					request.setAttribute("result", result); 
 					
 					flag=false;
