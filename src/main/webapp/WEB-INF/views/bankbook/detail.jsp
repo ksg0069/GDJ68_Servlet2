@@ -7,8 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<c:import url="../temp/bootstrap.jsp"></c:import>
 </head>
 <body>
+<c:import url="../temp/header.jsp"></c:import>
 	<h1>Detail page</h1>
 	<% BankBookDTO bankBookDTO = (BankBookDTO ) request.getAttribute("dto");%>
 	

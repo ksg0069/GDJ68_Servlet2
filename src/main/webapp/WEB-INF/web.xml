@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+	<filter>
+		<filter-name>encoding</filter-name>
+		<filter-class>com.iu.main.filter.EncodingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<servlet>
+	<servlet-name>mc</servlet-name>
+	<servlet-class>com.iu.main.member.MemberController</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	<servlet-name>mc</servlet-name>
+	<url-pattern>/member/*</url-pattern>   
+	</servlet-mapping>
 
 
 	<servlet>
@@ -12,8 +31,6 @@
 	<url-pattern>/bankbook/*</url-pattern>   
 	</servlet-mapping>
 	
-	
-	
 
 	<!--  Tomcat(was)에게 Servlet 객체 생성 -->
 	<servlet>
@@ -24,6 +41,6 @@
 	
 	<servlet-mapping>
 		<servlet-name>fc</servlet-name>
-		<url-pattern>/</url-pattern>  <!-- 루트라는 주소가 들어오면 Frontcotroller를 실행하세요  -->
+		<url-pattern>/index.do</url-pattern>  <!-- 루트라는 주소가 들어오면 Frontcotroller를 실행하세요  -->
 	</servlet-mapping>
 </web-app>
