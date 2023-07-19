@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 
@@ -34,10 +35,22 @@
 		          <a class="nav-link disabled">Disabled</a>
 		        </li>
 		      </ul>
+		      
 		      <nav>
 				<ul class="nav">
-					<li class="nav-item text-white me-3"><a href="/member/join.do">로그인</a></li>
+				<c:if test="${member eq null }">
+					<li class="nav-item text-white me-3"><a class="text-decoration-none" href="/member/login.do">로그인</a></li>
 					<li class="nav-item text-white me-3"><a class="text-decoration-none" href="/member/join.do">회원가입<a></a></li>
+				</c:if>	
+				</ul>		      
+		      </nav>
+		      
+		      <nav>
+				<ul class="nav">
+					<c:if test="${member ne null }">
+					<li class="nav-item text-white me-3"><a class="text-decoration-none" href="/member/logout.do">로그아웃</a></li>
+					<li class="nav-item text-white me-3"><a class="text-decoration-none" href="/member/mypage.do">마이페이지</a></li>
+					</c:if>
 				</ul>		      
 		      </nav>
 <!-- 		      <form class="d-flex" role="search">

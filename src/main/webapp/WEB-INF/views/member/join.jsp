@@ -45,7 +45,7 @@
 		<input type="date" class="form-control" id="birth" name="birth">   <!-- dto의 setter의 이름을 씀-->
 		</div>
 		
-		<button  type="submit" class="btn btn-outline-primary"><a  class="text-dark text-decoration-none " >회원가입</a></button>
+		<button  type="submit" class="btn btn-outline-primary"><a  class="text-dark text-decoration-none "  >회원가입</a></button>
 		
 		
 </form>		

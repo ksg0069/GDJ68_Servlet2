@@ -30,7 +30,7 @@
 			
 				 <tr>
 					<td ><a class="text-decoration-none" href="./detail.do?bookNum=${d.bookNum}">${d.bookName}</a></td>	
-					<td> class="text-decoration-none" ${d.bookRate} ${i.index } </td>
+					<td> ${d.bookRate} ${i.index } </td>
 						 
 	 			</tr>
 								

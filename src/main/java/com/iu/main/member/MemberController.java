@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.iu.bankBook.BankBookDTO;
 
@@ -36,52 +37,95 @@ public class MemberController extends HttpServlet {
 		// TODO Auto-generated method stub
 		String path = request.getPathInfo();
 		String viewName= "";
+		boolean flag = true;
 		try {
 		if(path.equals("/join.do")) {
 			
 				
 				
-					String method = request.getMethod();
-					boolean flag = true;
-					
-					if(method.equals("POST")) {
-						
-						MemberDTO memberDTO = new MemberDTO();
-						memberDTO.setId(request.getParameter("id"));
-						memberDTO.setPw(request.getParameter("pw"));
-						memberDTO.setName(request.getParameter("name"));
-						memberDTO.setEmail(request.getParameter("email"));
-						memberDTO.setBirth(Date.valueOf(request.getParameter("birth")));
-						
-						int result = memberDAO.join(memberDTO);
-//						request.setAttribute("result", result);
-						
-						flag=false;
-						path="../index.do";
-						
-					}else {
-						path="/WEB-INF/views/member/join.jsp";
-					}
-					
-					if(flag) {
-						//forword
-						RequestDispatcher view = request.getRequestDispatcher(path);
-						view.forward(request, response);
-						
-					}else {
-						response.sendRedirect(path);
-					}
-					
+			String method = request.getMethod();
 			
+					
+			if(method.equals("POST")) {
+						
+					MemberDTO memberDTO = new MemberDTO();
+					memberDTO.setId(request.getParameter("id"));
+					memberDTO.setPw(request.getParameter("pw"));
+					memberDTO.setName(request.getParameter("name"));
+					memberDTO.setEmail(request.getParameter("email"));
+					memberDTO.setBirth(Date.valueOf(request.getParameter("birth")));
+					
+					memberDAO.join(memberDTO);
+//					request.setAttribute("result", result);
+					
+					flag=false;
+					path="../index.do";
+					
+				}else {
+					path="/WEB-INF/views/member/join.jsp";
+				}
 				
+
+			}else if(path.equals("/login.do")) {
+				
+				String method = request.getMethod();
+				if(method.equals("POST")) {
+					MemberDTO memberDTO = new MemberDTO();
+					memberDTO.setId(request.getParameter("id"));
+					memberDTO.setPw(request.getParameter("pw"));
+					memberDTO = memberDAO.login(memberDTO);
+					
+					if(memberDTO != null) {
+						System.out.println("로그인 성공");
+						HttpSession session =request.getSession();
+						session.setAttribute("member", memberDTO);
+						
+					}else {
+						System.out.println("실패");
+					}
+					
+					
+					flag=false;
+					path="../index.do";
+					
+				}else {
+					path="/WEB-INF/views/member/login.jsp";
+				}
+				
+			}else if(path.equals("/logout.do")){
+				HttpSession session =request.getSession();
+				//1. MemberDTo값을 null
+//				session.setAttribute("member", null);
+				//2. Member 키와 MemberDTO 삭제
+//				session.removeValue("member");
+				//3. session 객체 소멸
+				session.invalidate();
+				
+				flag=false;
+				path="../index.do";
+			}else if(path.equals("/mypage.do")){
+				
+				path="/WEB-INF/views/member/mypage.jsp";
+				
+			
+			}
+				
+					
+					
+					
+									
 				
 		
+		
+		if(flag) {
+			//forword
+			RequestDispatcher view = request.getRequestDispatcher(path);
+			view.forward(request, response);
 			
-			}else {
-				
-				path="/WEB-INF/views/member/join.jsp";
-				
-			}
+		}else {
+			response.sendRedirect(path);
+		}
+		
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
